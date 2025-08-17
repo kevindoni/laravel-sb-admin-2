@@ -1,84 +1,172 @@
-# Laravel SB Admin 2
+# MikroTik Management System
 
-SB Admin 2 for Laravel.
+Sistem manajemen MikroTik lengkap dengan billing seperti Mikhmon dan PHPMixBill, dibangun dengan Laravel 12 dan SB Admin 2.
 
-| Laravel Version | Branch | Support     |
-|-----------------|--------|-------------|
-| 12.0            | main   |             |
-| 11.0            | v11.0  |             |
-| 10.0            | v10.0  | End of life |
-| 9.0             | v9.0   | End of life |
-| 8.0             | v8.0   | End of life |
+## Fitur Utama
+
+### 🔧 Router Management
+- ✅ CRUD manajemen router MikroTik
+- ✅ Test koneksi router real-time
+- ✅ Monitoring status router (online/offline)
+- ✅ Sinkronisasi data user dengan router
+- ✅ Penyimpanan informasi sistem router
+
+### 📦 Billing Plans
+- ✅ Manajemen paket internet (time-based, data-based, unlimited)
+- ✅ Pengaturan bandwidth limit per paket
+- ✅ Sistem pricing dan validity period
+- ✅ Toggle aktivasi/deaktivasi paket
+
+### 👥 Hotspot User Management
+- ✅ CRUD user hotspot dengan sinkronisasi ke MikroTik
+- ✅ Batch generation user untuk voucher
+- ✅ Monitor session aktif user
+- ✅ Disconnect user secara remote
+- ✅ Tracking penggunaan data dan waktu
+
+### 🎫 Voucher System
+- ✅ Generator voucher dengan kustomisasi kode
+- ✅ Batch generation hingga 500 voucher
+- ✅ Template voucher dengan preview
+- ✅ Aktivasi voucher otomatis
+- ✅ Export voucher ke CSV/PDF
+
+### 📊 Monitoring Dashboard
+- ✅ Monitoring real-time active users
+- ✅ Statistik penggunaan bandwidth
+- ✅ Status sistem router (CPU, memory, uptime)
+- ✅ Traffic monitoring per user
+- ✅ Auto-refresh setiap 30 detik
+
+### 🧾 Transaction & Billing
+- ✅ Sistem transaksi dan invoice
+- ✅ Top-up balance user
+- ✅ Tracking pembayaran manual
+- ✅ History transaksi lengkap
+
+### 📈 Reports & Analytics
+- ✅ Laporan revenue dan pendapatan
+- ✅ Analisis penggunaan data user
+- ✅ Top users berdasarkan data/waktu
+- ✅ Export data ke CSV
+- ✅ Grafik penggunaan harian/bulanan
+
+## Struktur Database
+
+### Tabel Utama:
+- `routers` - Data koneksi router MikroTik
+- `billing_plans` - Paket internet dan pricing
+- `hotspot_users` - User hotspot dengan relasi ke router dan paket
+- `vouchers` - Voucher codes dengan batch management
+- `transactions` - Transaksi billing dan pembayaran
+- `user_sessions` - Log session aktif user untuk monitoring
 
 ## Requirements
 
 - PHP >= 8.2
-- Ctype PHP Extension
-- cURL PHP Extension
-- DOM PHP Extension
-- Fileinfo PHP Extension
-- Filter PHP Extension
-- Hash PHP Extension
-- Mbstring PHP Extension
-- OpenSSL PHP Extension
-- PCRE PHP Extension
-- PDO PHP Extension
-- Session PHP Extension
-- Tokenizer PHP Extension
-- XML PHP Extension
+- Laravel 12
+- MySQL/PostgreSQL Database
+- MikroTik RouterOS v6.x atau v7.x dengan API aktif
+- Akses jaringan ke router MikroTik
 
 ## Installation
 
-- Clone the repo and `cd` into it
-- Run `composer install`
-- Rename or copy `.env.example` file to `.env`
-- Run `php artisan key:generate`
-- Set your database credentials in your `.env` file
+1. Clone repository dan install dependencies:
+```bash
+composer install
+```
 
-## Note
+2. Setup environment:
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-Recommend to install this preset on a project that you are starting from scratch, otherwise your project's design might break.
+3. Konfigurasi database di `.env`:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=mikrotik_management
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
 
-If you found this project useful, then please consider giving it a :star:
+4. Jalankan migrasi database:
+```bash
+php artisan migrate
+```
 
-## Credits
+5. Seed data awal (opsional):
+```bash
+php artisan db:seed
+```
 
-Laravel SB Admin 2 uses some open-source third-party libraries/packages, many thanks to the web community.
+6. Jalankan aplikasi:
+```bash
+php artisan serve
+```
 
-- Laravel - Open source framework.
-- LaravelEasyNav - Making managing navigation in Laravel easy.
-- SB Admin 2 - Thanks to Start Bootstrap.
+## Konfigurasi MikroTik
 
-## Preview
+Pastikan API service aktif di router MikroTik:
 
-`login`
+```
+/ip service enable api
+/ip service set api port=8728
+```
 
-<img src="https://imgur.com/YjGp6Sbl.png">
+Buat user untuk akses API:
+```
+/user add name=apiuser password=apipass group=full
+```
 
-***
+## Fitur Mendatang
 
-`register`
+- 🔄 Payment gateway integration (Midtrans, Xendit, dll)
+- 🔄 User portal untuk end-user
+- 🔄 WhatsApp notification
+- 🔄 SMS gateway integration
+- 🔄 Advanced reporting dengan chart
+- 🔄 Backup/restore konfigurasi
+- 🔄 Multi-tenant support
 
-<img src="https://imgur.com/Wj09cu4l.png">
+## Penggunaan
 
-***
+1. **Tambah Router**: Masuk ke Router Management → Tambah Router
+2. **Buat Paket**: Masuk ke Billing Plans → Tambah Paket
+3. **Generate Voucher**: Masuk ke Vouchers → Generate Voucher
+4. **Monitor Network**: Masuk ke Monitoring untuk melihat user aktif
+5. **Lihat Laporan**: Masuk ke Reports untuk analytics
 
-`dashboard`
+## API Integration
 
-<img src="https://imgur.com/CrmOfT5l.png">
+Aplikasi ini menggunakan MikroTik RouterOS API untuk:
+- Manajemen user hotspot
+- Monitoring session aktif
+- Disconnect user remote
+- Ambil informasi sistem router
+- Sinkronisasi data real-time
 
-***
+## Security Notes
 
-`profile`
-
-<img src="https://imgur.com/5t4eS1rl.png">
-
-***
-
-`logout`
-
-<img src="https://imgur.com/d9JclOYl.png">
+- Password router di-encrypt di database
+- CSRF protection untuk semua form
+- Authentication required untuk semua fitur
+- Input validation pada semua controller
 
 ## License
 
-Licensed under the [MIT](LICENSE) license.
+MIT License - Bebas digunakan untuk project komersial maupun personal.
+
+## Credits
+
+- Laravel Framework
+- SB Admin 2 Bootstrap Template
+- MikroTik RouterOS API
+- FontAwesome Icons
+
+---
+
+**Developed for MikroTik Hotspot Management**  
+Sistem billing dan manajemen voucher yang powerful untuk ISP dan warnet.
