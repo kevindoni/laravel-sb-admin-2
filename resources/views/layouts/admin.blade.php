@@ -32,9 +32,9 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/home') }}">
             <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
+                <i class="fas fa-router"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            <div class="sidebar-brand-text mx-3">MikroTik <sup>Manager</sup></div>
         </a>
 
         <!-- Divider -->
@@ -45,6 +45,70 @@
             <a class="nav-link" href="{{ route('home') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>{{ __('Dashboard') }}</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            {{ __('MikroTik Management') }}
+        </div>
+
+        <!-- Nav Item - Routers -->
+        <li class="nav-item {{ Nav::isRoute('routers.*') }}">
+            <a class="nav-link" href="{{ route('routers.index') }}">
+                <i class="fas fa-fw fa-router"></i>
+                <span>Router Management</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - Billing Plans -->
+        <li class="nav-item {{ Nav::isRoute('billing-plans.*') }}">
+            <a class="nav-link" href="{{ route('billing-plans.index') }}">
+                <i class="fas fa-fw fa-tags"></i>
+                <span>Billing Plans</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - Hotspot Users -->
+        <li class="nav-item {{ Nav::isRoute('hotspot-users.*') }}">
+            <a class="nav-link" href="{{ route('hotspot-users.index') }}">
+                <i class="fas fa-fw fa-users"></i>
+                <span>Hotspot Users</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - Vouchers -->
+        <li class="nav-item {{ Nav::isRoute('vouchers.*') }}">
+            <a class="nav-link" href="{{ route('vouchers.index') }}">
+                <i class="fas fa-fw fa-ticket-alt"></i>
+                <span>Vouchers</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - Monitoring -->
+        <li class="nav-item {{ Nav::isRoute('monitoring.*') }}">
+            <a class="nav-link" href="{{ route('monitoring.index') }}">
+                <i class="fas fa-fw fa-chart-line"></i>
+                <span>Monitoring</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - Reports -->
+        <li class="nav-item {{ Nav::isRoute('reports.*') }}">
+            <a class="nav-link" href="{{ route('reports.index') }}">
+                <i class="fas fa-fw fa-chart-bar"></i>
+                <span>Reports</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - Transactions -->
+        <li class="nav-item {{ Nav::isRoute('transactions.*') }}">
+            <a class="nav-link" href="{{ route('transactions.index') }}">
+                <i class="fas fa-fw fa-receipt"></i>
+                <span>Transactions</span>
+            </a>
         </li>
 
         <!-- Divider -->
